@@ -136,7 +136,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const RecordsListScreen(),
+                                    builder: (context) {
+                                      final records = context.read<HealthProvider>().records;
+                                      return Scaffold(
+                                        appBar: AppBar(
+                                          title: const Text('Records'),
+                                        ),
+                                        body: records.isEmpty
+                                            ? const Center(child: Text('No records found.'))
+                                            : ListView.builder(
+                                                itemCount: records.length,
+                                                itemBuilder: (ctx, i) {
+                                                  final r = records[i];
+                                                  return ListTile(
+                                                    title: Text(r.toString()),
+                                                  );
+                                                },
+                                              ),
+                                      );
+                                    },
                                   ),
                                 );
                               },
