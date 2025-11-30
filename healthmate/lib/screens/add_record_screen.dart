@@ -5,8 +5,9 @@ import '../models/health_record.dart';
 import '../providers/health_provider.dart';
 
 class AddRecordScreen extends StatefulWidget {
- 
+  final HealthRecord? record;
 
+  const AddRecordScreen({Key? key, this.record}) : super(key: key);
 
   @override
   State<AddRecordScreen> createState() => _AddRecordScreenState();
@@ -59,7 +60,7 @@ class _AddRecordScreenState extends State<AddRecordScreen> {
       setState(() => _isLoading = true);
 
       try {
-        
+        final provider = Provider.of<HealthProvider>(context, listen: false);
         
         final record = HealthRecord(
           id: widget.record?.id,
