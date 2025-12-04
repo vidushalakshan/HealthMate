@@ -146,7 +146,6 @@ class _AddRecordScreenState extends State<AddRecordScreen> {
               ),
               const SizedBox(height: 20),
               
-              // Steps Input
               TextFormField(
                 controller: _stepsController,
                 keyboardType: TextInputType.number,
@@ -175,7 +174,6 @@ class _AddRecordScreenState extends State<AddRecordScreen> {
               ),
               const SizedBox(height: 16),
               
-              // Calories Input
               TextFormField(
                 controller: _caloriesController,
                 keyboardType: TextInputType.number,
@@ -204,7 +202,6 @@ class _AddRecordScreenState extends State<AddRecordScreen> {
               ),
               const SizedBox(height: 16),
               
-              // Water Input
               TextFormField(
                 controller: _waterController,
                 keyboardType: TextInputType.number,
