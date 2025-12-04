@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
             foregroundColor: Colors.white,
           ),
         ),
-        home: const DashboardScreen(),
+        home: DashboardScreen(),
       ),
     );
   }

@@ -40,7 +40,6 @@ class DatabaseHelper {
       )
     ''');
 
-    // Insert dummy records for testing
     await _insertDummyData(db);
   }
 
@@ -71,14 +70,12 @@ class DatabaseHelper {
     }
   }
 
-  // CREATE - Insert a new health record
   Future<HealthRecord> create(HealthRecord record) async {
     final db = await instance.database;
     final id = await db.insert('health_records', record.toMap());
     return record.copyWith(id: id);
   }
 
-  // READ - Get a single record by ID
   Future<HealthRecord?> readRecord(int id) async {
     final db = await instance.database;
     final maps = await db.query(
@@ -95,7 +92,6 @@ class DatabaseHelper {
     }
   }
 
-  // READ - Get all records
   Future<List<HealthRecord>> readAllRecords() async {
     final db = await instance.database;
     const orderBy = 'date DESC';
@@ -103,7 +99,6 @@ class DatabaseHelper {
     return result.map((json) => HealthRecord.fromMap(json)).toList();
   }
 
-  // READ - Search records by date
   Future<List<HealthRecord>> searchByDate(String date) async {
     final db = await instance.database;
     final result = await db.query(
@@ -114,7 +109,6 @@ class DatabaseHelper {
     return result.map((json) => HealthRecord.fromMap(json)).toList();
   }
 
-  // READ - Get records for a specific date range
   Future<List<HealthRecord>> getRecordsByDateRange(
       String startDate, String endDate) async {
     final db = await instance.database;
@@ -127,7 +121,6 @@ class DatabaseHelper {
     return result.map((json) => HealthRecord.fromMap(json)).toList();
   }
 
-  // UPDATE - Update an existing record
   Future<int> update(HealthRecord record) async {
     final db = await instance.database;
     return db.update(
@@ -138,7 +131,6 @@ class DatabaseHelper {
     );
   }
 
-  // DELETE - Delete a record
   Future<int> delete(int id) async {
     final db = await instance.database;
     return await db.delete(
@@ -148,7 +140,6 @@ class DatabaseHelper {
     );
   }
 
-  // Get today's total statistics
   Future<Map<String, int>> getTodayStats(String todayDate) async {
     final records = await searchByDate(todayDate);
     
@@ -169,7 +160,6 @@ class DatabaseHelper {
     };
   }
 
-  // Close the database
   Future close() async {
     final db = await instance.database;
     db.close();
