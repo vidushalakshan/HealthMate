@@ -35,23 +35,19 @@ class RecordCard extends StatelessWidget {
   }
 
   String _getHealthScore() {
-    // Calculate a simple health score based on targets
     int score = 0;
-    
-    // Steps target: 10,000
+
     if (record.steps >= 10000) {
       score += 40;
     } else if (record.steps >= 7000) score += 30;
     else if (record.steps >= 5000) score += 20;
     else score += 10;
     
-    // Calories target: 400-600
     if (record.calories >= 400 && record.calories <= 600) {
       score += 30;
     } else if (record.calories >= 300) score += 20;
     else score += 10;
     
-    // Water target: 2000ml
     if (record.water >= 2000) {
       score += 30;
     } else if (record.water >= 1500) score += 20;
@@ -95,7 +91,6 @@ class RecordCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Header with date and actions
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -187,7 +182,6 @@ class RecordCard extends StatelessWidget {
               const Divider(height: 1),
               const SizedBox(height: 16),
               
-              // Stats Row
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -220,7 +214,6 @@ class RecordCard extends StatelessWidget {
                 ],
               ),
               
-              // Progress indicators
               const SizedBox(height: 16),
               _buildProgressSection(),
             ],
