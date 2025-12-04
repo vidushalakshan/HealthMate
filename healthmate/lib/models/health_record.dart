@@ -13,7 +13,6 @@ class HealthRecord {
     required this.water,
   });
 
-  // Convert HealthRecord to Map for database operations
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -24,7 +23,6 @@ class HealthRecord {
     };
   }
 
-  // Create HealthRecord from Map
   factory HealthRecord.fromMap(Map<String, dynamic> map) {
     return HealthRecord(
       id: map['id'],
@@ -35,7 +33,6 @@ class HealthRecord {
     );
   }
 
-  // Create a copy with modified fields
   HealthRecord copyWith({
     int? id,
     String? date,

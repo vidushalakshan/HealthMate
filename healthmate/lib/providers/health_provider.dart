@@ -16,7 +16,6 @@ class HealthProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get searchDate => _searchDate;
 
-  // Load all records from database
   Future<void> loadRecords() async {
     _isLoading = true;
     notifyListeners();
@@ -33,13 +32,11 @@ class HealthProvider with ChangeNotifier {
     }
   }
 
-  // Add a new record
   Future<void> addRecord(HealthRecord record) async {
     try {
       final newRecord = await DatabaseHelper.instance.create(record);
       _records.insert(0, newRecord);
       
-      // If we're currently filtering, update filtered list too
       if (_searchDate != null && record.date == _searchDate) {
         _filteredRecords.insert(0, newRecord);
       }
@@ -51,7 +48,6 @@ class HealthProvider with ChangeNotifier {
     }
   }
 
-  // Update an existing record
   Future<void> updateRecord(HealthRecord record) async {
     try {
       await DatabaseHelper.instance.update(record);
@@ -61,7 +57,6 @@ class HealthProvider with ChangeNotifier {
         _records[index] = record;
       }
 
-      // Update filtered list if active
       if (_filteredRecords.isNotEmpty) {
         final filteredIndex = _filteredRecords.indexWhere((r) => r.id == record.id);
         if (filteredIndex != -1) {
@@ -76,7 +71,6 @@ class HealthProvider with ChangeNotifier {
     }
   }
 
-  // Delete a record
   Future<void> deleteRecord(int id) async {
     try {
       await DatabaseHelper.instance.delete(id);
@@ -89,7 +83,6 @@ class HealthProvider with ChangeNotifier {
     }
   }
 
-  // Search records by date
   Future<void> searchByDate(String date) async {
     _isLoading = true;
     _searchDate = date;
@@ -105,20 +98,17 @@ class HealthProvider with ChangeNotifier {
     }
   }
 
-  // Clear search filter
   void clearSearch() {
     _searchDate = null;
     _filteredRecords = [];
     notifyListeners();
   }
 
-  // Get today's statistics
   Future<Map<String, int>> getTodayStats() async {
     final today = DateFormat('yyyy-MM-dd').format(DateTime.now());
     return await DatabaseHelper.instance.getTodayStats(today);
   }
 
-  // Get total statistics for all records
   Map<String, int> getTotalStats() {
     int totalSteps = 0;
     int totalCalories = 0;
